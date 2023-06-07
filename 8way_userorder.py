@@ -23,8 +23,8 @@ selectarea = Select(area)
 selectarea.select_by_value('tpe')
 
 #necessary elements input
-username.send_keys('2370005')
-password.send_keys('2626aaaa')
+username.send_keys('***')
+password.send_keys('***')
 
 #login button click
 submit = browser.find_element_by_id("loginbtu")
@@ -32,32 +32,32 @@ submit.click()
 
 #定義各家店URL及num_list
 url_list = [
-    'http://order.8way.com.tw/userorderindex?accno=10400071#',
-    'http://order.8way.com.tw/userorderindex?accno=10400072#',
-    'http://order.8way.com.tw/userorderindex?accno=10400111#',
-    'http://order.8way.com.tw/userorderindex?accno=10400112#',
-    'http://order.8way.com.tw/userorderindex?accno=10500011#',
-    'http://order.8way.com.tw/userorderindex?accno=10500012#',
-    'http://order.8way.com.tw/userorderindex?accno=22000231#',
-    'http://order.8way.com.tw/userorderindex?accno=22000232#',
-    'http://order.8way.com.tw/userorderindex?accno=22100011#',
-    'http://order.8way.com.tw/userorderindex?accno=22100012#',
-    'http://order.8way.com.tw/userorderindex?accno=23500151#',
-    'http://order.8way.com.tw/userorderindex?accno=23500152#',
-    'http://order.8way.com.tw/userorderindex?accno=23600091#',
-    'http://order.8way.com.tw/userorderindex?accno=23600092#',
-    'http://order.8way.com.tw/userorderindex?accno=23600161#',
-    'http://order.8way.com.tw/userorderindex?accno=23600162#',
-    'http://order.8way.com.tw/userorderindex?accno=23700051#',
-    'http://order.8way.com.tw/userorderindex?accno=23700052#',
-    'http://order.8way.com.tw/userorderindex?accno=23800041#',
-    'http://order.8way.com.tw/userorderindex?accno=23800042#',
-    'http://order.8way.com.tw/userorderindex?accno=24200141#',
-    'http://order.8way.com.tw/userorderindex?accno=24200142#',
-    'http://order.8way.com.tw/userorderindex?accno=24400011#',
-    'http://order.8way.com.tw/userorderindex?accno=24400012#',
-    'http://order.8way.com.tw/userorderindex?accno=235F001#',
-    'http://order.8way.com.tw/userorderindex?accno=242F001#'
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#',
+    'http://order.8way.com.tw/userorderindex?accno=***#'
 ]
 
 #用for迴圈重複24家店的資料抓取
