@@ -1,0 +1,279 @@
+function myFunction() {
+  var spreadsheet = SpreadsheetApp.getActive();
+  /**設定參數 */
+  var twyear = 112
+  var bname = "八德店"
+
+
+  /**設定12張表的表格 */
+  for (var i=1; i<13; i++){
+    var cs = "工作表" + i
+    spreadsheet.setActiveSheet(spreadsheet.getSheetByName(cs), true);
+    spreadsheet.getRange('A2').setValue("日期");
+    spreadsheet.getRange('A3').setValue("30");
+    for (var w=1; w<32; w++){
+      var datecell = "A"+(w+3)
+      spreadsheet.getRange(datecell).setValue(w);
+    }
+    spreadsheet.getRange('B2').setValue("營收");
+    for (var r=1; r<32; r++){
+      var cc1 = (r+3)
+      var cc2 = (r+60)
+      var cc3 = "B" + (r+3)
+      var rformu = '=ifs(H'+cc2+'="--", "--", H'+cc2+'=0, iferror((C'+cc1+'+E'+cc1+'+F'+cc1+'+G'+cc1+'+H'+cc1+'+I'+cc1+'+J'+cc1+'), 0), H'+cc2+'=1, "休")'
+      spreadsheet.getRange(cc3).setFormula(rformu);
+    }
+    spreadsheet.getRange('C2').setValue("現金收入");
+    /**設定uber及Tpay、line等格子 */
+    for (var g=1; g<7; g++){
+      var g1 = "B" + (35+g)
+      var g2 = "C" + (35+g)
+      var equalbeside = '='+g2
+      spreadsheet.getRange(g1).setValue(equalbeside);
+    }
+    spreadsheet.getRange('D2').setValue("貨款");
+    spreadsheet.getRange('D11').setFormula('=if(H61=0, B61+C61, 0)+if(H62=0, B62+C62, 0)+if(H63=0, B63+C63, 0)+if(H64=0, B64+C64, 0)+if(H65=0, B65+C65, 0)+if(H66=0, B66+C66, 0)+if(H67=0, B67+C67, 0)+if(H68=0, B68+C68, 0)');
+    spreadsheet.getRange('D19').setFormula('=if(H69=0, B69+C69, 0)+if(H70=0, B70+C70, 0)+if(H71=0, B71+C71, 0)+if(H72=0, B72+C72, 0)+if(H73=0, B73+C73, 0)+if(H74=0, B74+C74, 0)+if(H75=0, B75+C75, 0)+if(H76=0, B76+C76, 0)');
+    spreadsheet.getRange('D27').setFormula('=if(H77=0, B77+C77, 0)+if(H78=0, B78+C78, 0)+if(H79=0, B79+C79, 0)+if(H80=0, B80+C80, 0)+if(H81=0, B81+C81, 0)+if(H82=0, B82+C82, 0)+if(H83=0, B83+C83, 0)+if(H84=0, B84+C84, 0)');
+    spreadsheet.getRange('D34').setFormula('=if(H85=0, B85+C85, 0)+if(H86=0, B86+C86, 0)+if(H87=0, B87+C87, 0)+if(H88=0, B88+C88, 0)+if(H89=0, B89+C89, 0)+if(H90=0, B90+C90, 0)+if(H91=0, B91+C91, 0)');
+    spreadsheet.getRange('E2').setValue("水電瓦");
+    spreadsheet.getRange('F2').setValue("雜項");
+    spreadsheet.getRange('G2').setValue("包材");
+    spreadsheet.getRange('H2').setValue("薪資");
+    spreadsheet.getRange('I2').setValue("房租");
+    spreadsheet.getRange('J2').setValue("稅帳勞");
+    spreadsheet.getRange('K2').setValue("現金餘額");
+    for (var q=1; q<32; q++){
+      var cl1 = (q+2)
+      var cl2 = (q+3)
+      var cl3 = "K"+ (q+3)
+      var cashleftformu = '=K'+cl1+'+if(isnumber(C'+cl2+')=true, C'+cl2+', 0)-D'+cl2
+      spreadsheet.getRange(cl3).setFormula(cashleftformu);
+    }
+    spreadsheet.getRange('K35').setFormula('=K34-D35-E35-F35-G35-H35-I35-J35');
+    for (var o=36; o<42; o++){
+      var ocell1 = "K"+o
+      var ocell2 = (o-1)
+      var oformu = '=K'+ocell2+'+B'+o+'-D'+o+'-E'+o+'-F'+o+'-G'+o+'-H'+o+'-I'+o+'-J'+o
+      spreadsheet.getRange(ocell1).setFormula(oformu);
+    }
+    spreadsheet.getRange('A36').setValue("Line");
+    spreadsheet.getRange('A37').setValue("Tpay");
+    spreadsheet.getRange('A38').setValue("Uber");
+    spreadsheet.getRange('A39').setValue("Panda");
+    spreadsheet.getRange('A40').setValue("街口");
+    spreadsheet.getRange('A41').setValue("月結");
+    spreadsheet.getRange('A42').setValue("總計");
+    spreadsheet.getRange('B42').setFormula('=sum(B4:B41)');
+    spreadsheet.getRange('C42').setFormula('=sum(C4:C41)');
+    spreadsheet.getRange('D42').setFormula('=sum(D4:D41)');
+    spreadsheet.getRange('E42').setFormula('=sum(E4:E41)');
+    spreadsheet.getRange('F42').setFormula('=sum(F4:F41)');
+    spreadsheet.getRange('G42').setFormula('=sum(G4:G41)');
+    spreadsheet.getRange('H42').setFormula('=sum(H4:H41)');
+    spreadsheet.getRange('I42').setFormula('=sum(I4:I41)');
+    spreadsheet.getRange('J42').setFormula('=sum(J4:J41)');
+    spreadsheet.getRange('A43').setValue("%");
+    spreadsheet.getRange('B43').setFormula('=concatenate(int(B42/I63)&"/天")');
+    spreadsheet.getRange('C43').setFormula('=concatenate(int(C42/I63)&"/天")');
+    spreadsheet.getRange('D43').setFormula('=concatenate((iferror(round(D42/$B$42, 4),0)*100)&"%")');
+    spreadsheet.getRange('E43').setFormula('=concatenate((iferror(round(E42/$B$42, 4),0)*100)&"%")');
+    spreadsheet.getRange('F43').setFormula('=concatenate((iferror(round(F42/$B$42, 4),0)*100)&"%")');
+    spreadsheet.getRange('G43').setFormula('=concatenate((iferror(round(G42/$B$42, 4),0)*100)&"%")');
+    spreadsheet.getRange('H43').setFormula('=concatenate((iferror(round(H42/$B$42, 4),0)*100)&"%")');
+    spreadsheet.getRange('I43').setFormula('=concatenate((iferror(round(I42/$B$42, 4),0)*100)&"%")');
+    spreadsheet.getRange('J43').setFormula('=concatenate((iferror(round(J42/$B$42, 4),0)*100)&"%")');
+
+    spreadsheet.getRange('A46').setFormula('="毛利："&round(100-((D42/$B$42)*100), 2)&" %"');
+    spreadsheet.getRange('D46').setFormula('="純利："&iferror(round(100-((D42/B42+E42/B42+F42/B42+G42/B42+H42/B42+I42/B42+J42/B42)*100), 2), 0)&"%"');
+    spreadsheet.getRange('G46').setFormula('=B42&" x "&iferror(round(100-((D42/B42+E42/B42+F42/B42+G42/B42+H42/B42+I42/B42+J42/B42)*100), 2), 0)&" % = "&iferror(int(B42*(1-round(D42/B42+E42/B42+F42/B42+G42/B42+H42/B42+I42/B42+J42/B42, 4))), 0)');
+
+    spreadsheet.getRange('A2:K45').activate();
+    spreadsheet.getActiveRangeList().setBorder(true, true, true, true, true, true, '#000000', SpreadsheetApp.BorderStyle.SOLID); /**設定框線 */
+    spreadsheet.getActiveSheet().setColumnWidths(1, 17, 60); /**設定欄寬 */
+    spreadsheet.getRange('B3:B41').activate();
+    spreadsheet.getActiveRangeList().setBackground('#d9d9d9');
+    spreadsheet.getRange('D3:D34').activate();
+    spreadsheet.getActiveRangeList().setBackground('#d9d9d9');
+    spreadsheet.getRange('K3:K41').activate();
+    spreadsheet.getActiveRangeList().setBackground('#d9d9d9');
+    spreadsheet.getRange('B42:J43').activate();
+    spreadsheet.getActiveRangeList().setBackground('#d9d9d9'); /**設定填滿顏色 */
+    spreadsheet.getRange('E35:J41').activate();
+    spreadsheet.getActiveRangeList().setFontColor('#ff0000'); /**設定文字顏色 */
+    spreadsheet.getRange('A2:K2').activate();
+    spreadsheet.getActiveRangeList().setHorizontalAlignment('center');
+    spreadsheet.getRange('A1').activate();
+    spreadsheet.getActiveRangeList().setFontWeight('bold').setHorizontalAlignment('left');
+    spreadsheet.getRange('M2').activate();
+    spreadsheet.getActiveRangeList().setFontWeight('bold').setHorizontalAlignment('left'); /**設定對齊及粗體 */
+
+    /**小表表格設定 */
+    spreadsheet.getRange('M3').setValue("日期");
+    spreadsheet.getRange('N3').setValue("八方斤數");
+    spreadsheet.getRange('O3').setValue("餡皮比");
+    spreadsheet.getRange('P3').setValue("麵類袋數");
+    spreadsheet.getRange('Q3').setValue("麵類總計");
+    spreadsheet.getRange('M35').setValue("總計");
+    for(u=1; u<32; u++){
+      var startcount1 = (u+3)
+      var datecell2 = "M"+(u+3)
+      var tpnumcell = "N"+(u+3)
+      var tpnumcell2 = "O"+(u+3)
+      var tpnumcell3 = "P"+(u+3)
+      var tpnumcell4 = "Q"+(u+3)
+      var restj = (u+60)
+      spreadsheet.getRange(datecell2).setValue(u);
+      spreadsheet.getRange(tpnumcell).setFormula('=ifs(H'+restj+'="--", "--", H'+restj+'=1, "休", H'+restj+'=0, D'+restj+')');
+      spreadsheet.getRange(tpnumcell2).setFormula('=if(isnumber(N'+startcount1+')=true, iferror(round(E'+restj+'/D'+restj+',3), 0), "")');
+      spreadsheet.getRange(tpnumcell3).setFormula('=if(isnumber(N'+startcount1+')=true, iferror(concatenate(F'+restj+'&"+"&G'+restj+'), "0+0"), "")');
+      spreadsheet.getRange(tpnumcell4).setFormula('=if(isnumber(N'+startcount1+')=true, iferror(F'+restj+'+G'+restj+', 0), "")');
+    }
+    spreadsheet.getRange('N35').setFormula('=sum(N4:N34)');
+    spreadsheet.getRange('O35').setFormula('=sum(O4:O34)');
+    spreadsheet.getRange('Q35').setFormula('=sum(Q4:Q34)');
+    spreadsheet.getRange('N36').setFormula('=concatenate(round(N35/I63,1)&"/天")');
+    spreadsheet.getRange('O36').setFormula('=round(O35/I63,3)');
+    spreadsheet.getRange('Q36').setFormula('=concatenate(round(Q35/I63,1)&"條/天")');
+    spreadsheet.getRange('P4:Q34').activate();
+    spreadsheet.getActiveRangeList().setHorizontalAlignment('center');
+    spreadsheet.getRange('N36:Q36').activate();
+    spreadsheet.getActiveRangeList().setHorizontalAlignment('center');
+    spreadsheet.getRange('Q35').activate();
+    spreadsheet.getActiveRangeList().setHorizontalAlignment('center');
+    spreadsheet.getRange('M3:Q3').activate();
+    spreadsheet.getActiveRangeList().setHorizontalAlignment('center'); /**設定置中對齊 */
+    spreadsheet.getRange('M3:Q36').activate();
+    spreadsheet.getActiveRangeList().setBorder(true, true, true, true, true, true, '#000000', SpreadsheetApp.BorderStyle.SOLID); /**設定框線 */
+
+    /**設定原始資料區 */
+    spreadsheet.getRange('A60').setValue("日期\項目");
+    spreadsheet.getRange('B60').setValue("日進貨");
+    spreadsheet.getRange('C60').setValue("日進貨(蘿蔔)");
+    spreadsheet.getRange('D60').setValue("斤數");
+    spreadsheet.getRange('E60').setValue("皮");
+    spreadsheet.getRange('F60').setValue("細麵");
+    spreadsheet.getRange('G60').setValue("粗麵");
+    spreadsheet.getRange('H60').setValue("店休J");
+    spreadsheet.getRange('I60').setValue("店休T");
+    spreadsheet.getRange('I61').setValue("0");
+    spreadsheet.getRange('I62').setValue("營業天數");
+    spreadsheet.getRange('I63').setValue("31");
+    for (y=1;y<32;y++){
+      datecell3 = "A"+(y+60)
+      tpnumcell5 = "H"+(y+60)
+      spreadsheet.getRange(datecell3).setValue(y);
+      spreadsheet.getRange(tpnumcell5).setValue("0");
+    }
+  }
+
+  /**更改表單名稱和其他細目 */
+  var jan = twyear + "01"
+  var feb = twyear + "02"
+  var mar = twyear + "03"
+  var apr = twyear + "04"
+  var may = twyear + "05"
+  var jun = twyear + "06"
+  var jul = twyear + "07"
+  var aug = twyear + "08"
+  var sep = twyear + "09"
+  var oct = twyear + "10"
+  var nov = twyear + "11"
+  var dec = twyear + "12"
+
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('工作表1'), true);
+  spreadsheet.renameActiveSheet("一月");
+  spreadsheet.getRange('A1').setValue(jan);
+  spreadsheet.getRange('M2').setValue(jan);
+  spreadsheet.getRange('J44').setValue('01分');
+  spreadsheet.getRange('K3').setFormula('=importrange("目標網址","十二月!K45")')
+  spreadsheet.getRange('K1').setValue(bname);
+
+
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('工作表2'), true);
+  spreadsheet.renameActiveSheet("二月");
+  spreadsheet.getRange('A1').setValue(feb);
+  spreadsheet.getRange('M2').setValue(feb);
+  spreadsheet.getRange('J44').setValue('02分');
+  spreadsheet.getRange('K1').setValue(bname);
+
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('工作表3'), true);
+  spreadsheet.renameActiveSheet("三月");
+  spreadsheet.getRange('A1').setValue(mar);
+  spreadsheet.getRange('M2').setValue(mar);
+  spreadsheet.getRange('J44').setValue('03分');
+  spreadsheet.getRange('K3').setFormula("='二月'!K45");
+  spreadsheet.getRange('K1').setValue(bname);
+
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('工作表4'), true);
+  spreadsheet.renameActiveSheet("四月");
+  spreadsheet.getRange('A1').setValue(apr);
+  spreadsheet.getRange('M2').setValue(apr);
+  spreadsheet.getRange('J44').setValue('04分');
+  spreadsheet.getRange('K3').setFormula("='三月'!K45");
+  spreadsheet.getRange('K1').setValue(bname);
+
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('工作表5'), true);
+  spreadsheet.renameActiveSheet("五月");
+  spreadsheet.getRange('A1').setValue(may);
+  spreadsheet.getRange('M2').setValue(may);
+  spreadsheet.getRange('J44').setValue('05分');
+  spreadsheet.getRange('K3').setFormula("='四月'!K45");
+  spreadsheet.getRange('K1').setValue(bname);
+
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('工作表6'), true);
+  spreadsheet.renameActiveSheet("六月");
+  spreadsheet.getRange('A1').setValue(jun);
+  spreadsheet.getRange('M2').setValue(jun);
+  spreadsheet.getRange('J44').setValue('06分');
+  spreadsheet.getRange('K3').setFormula("='五月'!K45");
+  spreadsheet.getRange('K1').setValue(bname);
+
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('工作表7'), true);
+  spreadsheet.renameActiveSheet("七月");
+  spreadsheet.getRange('A1').setValue(jul);
+  spreadsheet.getRange('M2').setValue(jul);
+  spreadsheet.getRange('J44').setValue('07分');
+  spreadsheet.getRange('K3').setFormula("='六月'!K45");
+  spreadsheet.getRange('K1').setValue(bname);
+
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('工作表8'), true);
+  spreadsheet.renameActiveSheet("八月");
+  spreadsheet.getRange('A1').setValue(aug);
+  spreadsheet.getRange('M2').setValue(aug);
+  spreadsheet.getRange('J44').setValue('08分');
+  spreadsheet.getRange('K3').setFormula("='七月'!K45");
+  spreadsheet.getRange('K1').setValue(bname);
+
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('工作表9'), true);
+  spreadsheet.renameActiveSheet("九月");
+  spreadsheet.getRange('A1').setValue(sep);
+  spreadsheet.getRange('M2').setValue(sep);
+  spreadsheet.getRange('J44').setValue('09分');
+  spreadsheet.getRange('K3').setFormula("='八月'!K45");
+  spreadsheet.getRange('K1').setValue(bname);
+
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('工作表10'), true);
+  spreadsheet.renameActiveSheet("十月");
+  spreadsheet.getRange('A1').setValue(oct);
+  spreadsheet.getRange('M2').setValue(oct);
+  spreadsheet.getRange('J44').setValue('10分');
+  spreadsheet.getRange('K3').setFormula("='九月'!K45");
+  spreadsheet.getRange('K1').setValue(bname);
+
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('工作表11'), true);
+  spreadsheet.renameActiveSheet("十一月");
+  spreadsheet.getRange('A1').setValue(nov);
+  spreadsheet.getRange('M2').setValue(nov);
+  spreadsheet.getRange('J44').setValue('11分');
+  spreadsheet.getRange('K3').setFormula("='十月'!K45");
+  spreadsheet.getRange('K1').setValue(bname);
+
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('工作表12'), true);
+  spreadsheet.renameActiveSheet("十二月");
+  spreadsheet.getRange('A1').setValue(dec);
+  spreadsheet.getRange('M2').setValue(dec);
+  spreadsheet.getRange('J44').setValue('12分');
+  spreadsheet.getRange('K3').setFormula("='十一月'!K45");
+  spreadsheet.getRange('K1').setValue(bname);
+};
