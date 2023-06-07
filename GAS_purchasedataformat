@@ -1,0 +1,43 @@
+function myFunction() {
+
+  var ss = SpreadsheetApp.getActive();
+
+  //刪除M cloum 中含有'免稅'字詞的row
+  var r = ss.getRange('M:M');
+  var v = r.getValues();
+  for (var i=v.length-1; i>=0; i--)
+    if (v[0,i] == '免稅')
+    ss.deleteRow(i+1);
+
+  //刪除A(=0) cloum 中空白的格子
+  //前段定義，後段刪除，可當範本參考
+  var mProrange = ss.getDataRange();
+  var mProragval = mProrange.getValues();
+  var deleteval = ''
+  var deleteColumIdentifier = 0
+
+  for(var i = mProragval.length-1; i>=0; i--){
+    if(mProragval[i][deleteColumIdentifier] === deleteval){
+      ss.deleteRow(i+1);
+    }
+  }
+  
+  //刪除其他無用資料，直接拿上列當範本
+  var mProrange = ss.getDataRange();
+  var mProragval = mProrange.getValues();
+  var deleteval = '動作: 賣方開立(買方未收)'
+  var deleteColumIdentifier = 0
+
+  for(var i = mProragval.length-1; i>=0; i--){
+    if(mProragval[i][deleteColumIdentifier] !== deleteval){
+      ss.deleteRow(i+1);
+    }
+  }
+
+  //設定必要格式
+  ss.getRange('F1').setFontWeight('bold').setFontColor('#ff0000');
+  ss.getRange('J:L').setNumberFormat('0');
+  ss.getRange('H:H').setNumberFormat('@');
+  ss.getRange('F:F').setNumberFormat('0');
+
+};
